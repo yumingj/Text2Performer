@@ -25,6 +25,8 @@
 
 :open_book: For more visual results, go checkout our <a href="https://yumingj.github.io/projects/Text2Performer.html" target="_blank">project page</a>
 
+</br>
+</br>
 
 ## :newspaper_roll: License
 
