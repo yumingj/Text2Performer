@@ -5,7 +5,7 @@
 <div>
     <a href="https://yumingj.github.io/" target="_blank">Yuming Jiang</a><sup>1</sup>,
     <a href="https://williamyang1991.github.io/" target="_blank">Shuai Yang</a><sup>1</sup>,
-    <a>Tong Liang Koh</a><sup>1</sup>
+    <a>Tong Liang Koh</a><sup>1</sup>,
     <a href="https://wywu.github.io/" target="_blank">Wayne Wu</a><sup>2</sup>,
     <a href="https://www.mmlab-ntu.com/person/ccloy/" target="_blank">Chen Change Loy</a><sup>1</sup>,
     <a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a><sup>1</sup>
