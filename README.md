@@ -14,7 +14,7 @@
     <sup>1</sup>S-Lab, Nanyang Technological University&emsp; <sup>2</sup>Shanghai AI Laboratory
 </div>
 
-[Paper]() | [Project Page](https://yumingj.github.io/projects/Text2Performer.html) | [Video](https://youtu.be/YwhaJUk_qo0)
+[Paper](https://arxiv.org/pdf/2304.08483.pdf) | [Project Page](https://yumingj.github.io/projects/Text2Performer.html) | [Video](https://youtu.be/YwhaJUk_qo0)
 </br>
 
 <strong>Text2Performer synthesizes human videos by taking the text descriptions as the only input.</strong>
