@@ -30,4 +30,5 @@
 
 Distributed under the S-Lab License. See `LICENSE` for more information.
 
+![visitor badge](https://visitor-badge.glitch.me/badge?page_id=yumingj/Text2Performer&left_color=red&right_color=green&left_text=HelloVisitors)
 
