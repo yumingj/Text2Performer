@@ -1,0 +1,72 @@
+name: vqgan_decompose_low_res
+use_tb_logger: true
+set_CUDA_VISIBLE_DEVICES: ~
+gpu_ids: [3]
+num_gpu: 4
+
+# dataset configs
+batch_size_per_gpu: 16
+num_worker_per_gpu: 4
+datasets:
+  train:
+    type: DecomposeMixDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/train_frame_num.txt
+    shhq_data_dir: ./datasets/shhq_dataset
+    downsample_factor: 2
+    xflip: True
+
+  val:
+    type: DecomposeDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/val_frame_num.txt
+    downsample_factor: 2
+    xflip: False
+
+  test:
+    type: DecomposeDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/test_frame_num.txt
+    downsample_factor: 2
+    xflip: False
+
+
+model_type: VQGANDecomposeModel
+# network configs
+embed_dim: 256
+n_embed: 1024
+double_z: false
+z_channels: 256
+resolution: 512
+in_channels: 3
+out_ch: 3
+ch: 128
+ch_mult: [1, 1, 2, 2, 4]
+other_ch_mult: [4, 4]
+num_res_blocks: 2
+attn_resolutions: [32]
+dropout: 0.0
+
+disc_layers: 1
+disc_weight_max: 1
+disc_start_step: 10001
+n_channels: 3
+ndf: 64
+nf: 128
+perceptual_weight: 1.0
+
+num_segm_classes: 24
+
+
+# training configs
+val_freq: 5000
+print_freq: 10
+weight_decay: 0
+manual_seed: 2021
+num_epochs: 100000
+lr: !!float 1.0e-04
+lr_decay: step
+gamma: 1.0
+step: 50
+
+random_dropout: 1.0

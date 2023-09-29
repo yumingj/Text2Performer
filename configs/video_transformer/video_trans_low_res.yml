@@ -1,0 +1,106 @@
+name: video_trans_low_res
+use_tb_logger: true
+set_CUDA_VISIBLE_DEVICES: ~
+gpu_ids: [3]
+num_gpu: 4
+
+# dataset configs
+batch_size_per_gpu: 1
+num_worker_per_gpu: 0
+datasets:
+  train:
+    type: MovingLabelsClipAllRateTextDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    action_label_folder: ./datasets/action_label
+    data_name_txt: ./datasets/train_frame_num.txt
+    frame_sample_rate: 1
+    fixed_video_len: 20
+    moving_frame_dict: ./datasets/moving_frames.npy
+    overall_caption_templates_file: ./datasets/caption_motion_template.json
+    interpolation_rate: 0.2
+    downsample_factor: 2
+    random_start: True
+    xflip: False
+
+  val:
+    type: MovingLabelsClipAllRateTextDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    action_label_folder: ./datasets/action_label
+    data_name_txt: ./datasets/val_frame_num.txt
+    frame_sample_rate: 1
+    fixed_video_len: 20
+    moving_frame_dict: ./datasets/moving_frames.npy
+    overall_caption_templates_file: ./datasets/caption_motion_template.json
+    downsample_factor: 2
+    interpolation_rate: 0.0
+    random_start: True
+    xflip: False
+
+  test:
+    type: MovingLabelsClipAllRateTextDataset
+    video_dir: ./datasets/FashionDataset_frames_crop
+    action_label_folder: ./datasets/action_label
+    data_name_txt: ./datasets/test_frame_num.txt
+    frame_sample_rate: 1
+    moving_frame_dict: ./datasets/moving_frames.npy
+    fixed_video_len: 20
+    overall_caption_templates_file: ./datasets/caption_motion_template.json
+    downsample_factor: 2
+    interpolation_rate: 0.0
+    random_start: True
+    xflip: False
+
+prefetch_mode: ~
+
+# pretrained models
+img_ae_path: ./pretrained_models/vqgan_decomposed_low_res.pth
+
+model_type: VideoTransformerModel
+
+# network configs
+# image autoencoder
+img_embed_dim: 256
+img_n_embed: 1024
+img_double_z: false
+img_z_channels: 256
+img_resolution: 512
+img_in_channels: 3
+img_out_ch: 3
+img_ch: 128
+img_ch_mult: [1, 1, 2, 2, 4]
+img_other_ch_mult: [4, 4]
+img_num_res_blocks: 2
+img_attn_resolutions: [32]
+img_dropout: 0.0
+
+# sampler configs
+dim: 128
+depth: 6
+dim_head: 64
+heads: 12
+ff_mult: 4
+norm_out: true
+attn_dropout: 0.0
+ff_dropout: 0.0
+final_proj: true
+normformer: true
+rotary_emb: true
+latent_shape: [4, 2]
+action_label_num: 23
+
+# training configs
+val_freq: 50
+print_freq: 100
+weight_decay: 0
+manual_seed: 2022
+num_epochs: 1000
+lr: !!float 1e-4
+lr_decay: step
+gamma: 1.0
+step: 50
+perceptual_weight: 1.0
+
+larger_ratio: 6
+
+num_inside_timesteps: 6
+inside_ratio: 0

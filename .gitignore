@@ -1,0 +1,7 @@
+results/*
+.ipynb_checkpoints/*
+*.pyc
+experiments/*
+pretrained_models/*
+tb_logger/*
+datasets/*

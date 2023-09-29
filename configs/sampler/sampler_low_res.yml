@@ -1,0 +1,80 @@
+name: sampler_low_res
+use_tb_logger: true
+set_CUDA_VISIBLE_DEVICES: ~
+gpu_ids: [3]
+
+# dataset configs
+batch_size: 4
+num_workers: 1
+datasets:
+  train:
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/train_frame_num.txt
+    text_file: ./datasets/captions_app.json
+    downsample_factor: 2
+    xflip: True
+
+  val:
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/val_frame_num.txt
+    text_file: ./datasets/captions_app.json
+    downsample_factor: 2
+    xflip: False
+
+  test:
+    video_dir: ./datasets/FashionDataset_frames_crop
+    data_name_txt: ./datasets/test_frame_num.txt
+    text_file: ./datasets/captions_app.json
+    downsample_factor: 2
+    xflip: False
+
+# pretrained models
+img_ae_path: ./pretrained_models/vqgan_decomposed_low_res.pth
+
+model_type: AppTransformerModel
+# network configs
+
+# image autoencoder
+img_embed_dim: 256
+img_n_embed: 1024
+img_double_z: false
+img_z_channels: 256
+img_resolution: 512
+img_in_channels: 3
+img_out_ch: 3
+img_ch: 128
+img_ch_mult: [1, 1, 2, 2, 4]
+img_other_ch_mult: [4, 4]
+img_num_res_blocks: 2
+img_attn_resolutions: [32]
+img_dropout: 0.0
+
+# sampler configs
+codebook_size: 1024
+bert_n_emb: 512
+bert_n_layers: 24
+bert_n_head: 8
+block_size: 128 # 32 x 16
+latent_shape: [16, 8]
+embd_pdrop: 0.0
+resid_pdrop: 0.0
+attn_pdrop: 0.0
+
+# loss configs
+loss_type: reweighted_elbo
+mask_schedule: random
+
+sample_steps: 64
+
+# training configs
+val_freq: 50
+print_freq: 100
+weight_decay: 0
+manual_seed: 2021
+num_epochs: 1000
+lr: !!float 1e-4
+lr_decay: step
+gamma: 1.0
+step: 50
+
+text_seq_len: 50
